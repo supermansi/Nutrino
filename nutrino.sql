@@ -2,7 +2,7 @@ CREATE SCHEMA IF NOT EXISTS Nutrino;
 USE Nutrino;
 
 DROP TABLE IF EXISTS RecipeToIngredients;
-DROP TABLE IF EXISTS RecipeToHealthLabels;
+DROP TABLE IF EXISTS recipe_to_health_labels;
 DROP TABLE IF EXISTS Ingredients;
 DROP TABLE IF EXISTS HealthLabels;
 DROP TABLE IF EXISTS PlannerToRecipe;
@@ -136,3 +136,97 @@ CREATE TABLE recipe_to_health_labels(
         ON DELETE CASCADE,
 	UNIQUE KEY (label_name, recipe_name)
 );
+
+
+
+INSERT INTO `nutrino`.`users`
+(`username`,
+`password`,
+`firstName`,
+`lastName`,
+`email`,
+`privileges`)
+VALUES
+('alice', 'alice', 'Alice', 'Wonderland', 'alice@wonderland.com', 'none');
+
+INSERT INTO `nutrino`.`users`
+(`username`,
+`password`,
+`firstName`,
+`lastName`,
+`email`,
+`privileges`)
+VALUES
+('bob', 'bob', 'Bob', 'Marley', 'bob@marley.com', 'none');
+
+INSERT INTO `nutrino`.`users`
+(`username`,
+`password`,
+`firstName`,
+`lastName`,
+`email`,
+`privileges`)
+VALUES
+('john', 'john', 'John', 'Doe', 'john@doe.com', 'admin');
+
+INSERT INTO `nutrino`.`users`
+(`username`,
+`password`,
+`firstName`,
+`lastName`,
+`email`,
+`privileges`)
+VALUES
+('steve', 'steve', 'Steve', 'Jobs', 'steve@jobs.com', 'admin');
+
+INSERT INTO `nutrino`.`users`
+(`username`,
+`password`,
+`firstName`,
+`lastName`,
+`email`,
+`privileges`)
+VALUES
+('bill', 'bill', 'Bill', 'Gates', 'bill@gates.com', 'none');
+
+INSERT INTO `nutrino`.`administrator`
+(`username`,
+`lastLogin`)
+VALUES
+('john', '2018-05-02 10:03:42');
+
+INSERT INTO `nutrino`.`administrator`
+(`username`,
+`lastLogin`)
+VALUES
+('steve', '2018-07-11 20:34:05');
+
+INSERT INTO `nutrino`.`loggedinuser`
+(`username`,
+`height`,
+`weight`,
+`diet`)
+VALUES
+('alice', '165', '57', 'vegan');
+
+INSERT INTO `nutrino`.`loggedinuser`
+(`username`,
+`height`,
+`weight`,
+`diet`)
+VALUES
+('bob', '182', '72', 'gluten-free');
+
+INSERT INTO `nutrino`.`loggedinuser`
+(`username`,
+`height`,
+`weight`,
+`diet`)
+VALUES
+('bill', '178', '83', 'non-vegetarian');
+
+LOAD DATA INFILE 'health_labels.csv' INTO TABLE healthLabels
+	FIELDS ENCLOSED BY '"'
+	LINES TERMINATED BY ',';
+    
+
