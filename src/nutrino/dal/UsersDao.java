@@ -11,7 +11,7 @@ import nutrino.model.Users;
 
 public class UsersDao {
 	
-protected ConnectionManager connectionManager;
+	protected ConnectionManager connectionManager;
 	
 	private static UsersDao instance = null;
 	protected UsersDao() {
@@ -22,6 +22,34 @@ protected ConnectionManager connectionManager;
 			instance = new UsersDao();
 		}
 		return instance;
+	}
+	
+	public Users create(Users user)throws SQLException {
+		String insertUser = "INSERT INTO Users(UserName,Password,FirstName,LastName,Email,Privileges) VALUES(?,?,?,?,?,?);";
+		Connection connection = null;
+		PreparedStatement insertStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			insertStmt = connection.prepareStatement(insertUser);
+			insertStmt.setString(1, user.getUsername());
+			insertStmt.setString(2, user.getPassword());
+			insertStmt.setString(3, user.getFirstName());
+			insertStmt.setString(4, user.getLastName());
+			insertStmt.setString(5, user.getEmail());
+			insertStmt.setString(6, user.getPrivileges());
+			insertStmt.executeUpdate();
+			return user;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(insertStmt != null) {
+				insertStmt.close();
+			}
+		}
 	}
 	
 	public List<Users> getAllUsers() throws SQLException {
@@ -91,6 +119,30 @@ protected ConnectionManager connectionManager;
 			}
 		}
 		return null;
+	}
+	
+	public Users delete(Users user) throws SQLException {
+		String deleteUser = "DELETE FROM Users WHERE UserName=?;";
+		Connection connection = null;
+		PreparedStatement deleteStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			deleteStmt = connection.prepareStatement(deleteUser);
+			deleteStmt.setString(1, user.getUsername());
+			deleteStmt.executeUpdate();
+			
+			return null;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(deleteStmt != null) {
+				deleteStmt.close();
+			}
+		}
 	}
 
 }

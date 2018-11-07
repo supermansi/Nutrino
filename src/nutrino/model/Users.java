@@ -17,6 +17,12 @@ public class Users {
 		this.email = email;
 		this.privileges = privileges;
 	}
+	
+	public Users(String username) {
+		super();
+		this.username = username;
+	}
+
 	public String getUsername() {
 		return username;
 	}
