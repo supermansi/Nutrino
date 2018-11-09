@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import nutrino.model.LoggedInUser;
+import nutrino.model.LoggedInUser.DietLabels;
 
 public class LoggedInUserDao {
 	
@@ -80,6 +81,32 @@ public class LoggedInUserDao {
 		return null;
 	}
 	
+	public LoggedInUser updateDiet(LoggedInUser user, String diet) throws SQLException {
+		String userUpdateDiet = "UPDATE loggedinuser SET diet=? WHERE username=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(userUpdateDiet);
+			updateStmt.setString(1, diet);
+			updateStmt.setString(2, user.getUsername());
+			updateStmt.executeUpdate();
+			
+			user.setDiet(LoggedInUser.DietLabels.valueOf(diet));
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
 	public LoggedInUser delete(LoggedInUser user) throws SQLException {
 		String deleteUser = "DELETE FROM LoggedInUser WHERE UserName=?;";
 		Connection connection = null;
@@ -103,7 +130,5 @@ public class LoggedInUserDao {
 			}
 		}
 	}
-	
-	
 
 }

@@ -14,8 +14,19 @@ public class Recipe {
 	
 	public Recipe(int id, String uri, String label, String image, String url, String calories, String ingredient_lines,
 			String total_weight, String health_labels) {
-		super();
 		this.id = id;
+		this.uri = uri;
+		this.label = label;
+		this.image = image;
+		this.url = url;
+		this.calories = calories;
+		this.ingredient_lines = ingredient_lines;
+		this.total_weight = total_weight;
+		this.health_labels = health_labels;
+	}
+	
+	public Recipe(String uri, String label, String image, String url, String calories, String ingredient_lines,
+			String total_weight, String health_labels) {
 		this.uri = uri;
 		this.label = label;
 		this.image = image;

@@ -7,7 +7,7 @@ public class LoggedInUser extends Users {
 	protected DietLabels diet;
 	
 	public enum DietLabels {
-		balanced, Vegan, Vegetarian, Paleo, Pescatarian
+		balanced, vegan, Vegetarian, Paleo, Pescatarian
 	}
 	
 	public LoggedInUser(String username, float height, float weight, DietLabels diet) {
