@@ -23,6 +23,7 @@ protected ConnectionManager connectionManager;
 		return instance;
 	}
 	
+	// CREATE
 	public Administrator create(Administrator user)throws SQLException {
 		String insertUser = "INSERT INTO Administrator(username, height, weight, diet) VALUES(?,?,?,?);";
 		Connection connection = null;
@@ -47,6 +48,7 @@ protected ConnectionManager connectionManager;
 		}
 	}
 	
+	// READ
 	public Administrator getAdministratorByUserName(String UserName) throws SQLException {
 		String selectUser = "SELECT * FROM Administrator WHERE username=?;";
 		Connection connection = null;
@@ -77,6 +79,32 @@ protected ConnectionManager connectionManager;
 		return null;
 	}
 	
+	// UPDATE
+	public Administrator updateLastLogin(Administrator user, Timestamp lastLogin) throws SQLException {
+		String updateFirstName = "UPDATE administrator SET lastLogin=? WHERE username=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updateFirstName);
+			updateStmt.setTimestamp(1, lastLogin);
+			updateStmt.setString(2, user.getUsername());
+			updateStmt.executeUpdate();
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
+	// DELETE
 	public Administrator delete(Administrator user) throws SQLException {
 		String deleteUser = "DELETE FROM Administrator WHERE UserName=?;";
 		Connection connection = null;

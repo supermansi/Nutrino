@@ -14,6 +14,15 @@ public class Planner {
 	public enum Time {
 		Breakfast, Lunch, Dinner
 	}
+	
+	
+
+	public Planner(int planID, Users user, Day day, Time time) {
+		this.planID = planID;
+		this.user = user;
+		this.day = day;
+		this.time = time;
+	}
 
 	public int getPlanID() {
 		return planID;

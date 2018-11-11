@@ -24,6 +24,7 @@ public class UsersDao {
 		return instance;
 	}
 	
+	// CREATE
 	public Users create(Users user)throws SQLException {
 		String insertUser = "INSERT INTO Users(UserName,Password,FirstName,LastName,Email,Privileges) VALUES(?,?,?,?,?,?);";
 		Connection connection = null;
@@ -51,7 +52,7 @@ public class UsersDao {
 			}
 		}
 	}
-	
+	 // READ
 	public List<Users> getAllUsers() throws SQLException {
 		String findAll = "SELECT * FROM Users;";
 		Connection connection = null;
@@ -121,6 +122,66 @@ public class UsersDao {
 		return null;
 	}
 	
+	public Users getUserByUserCredentials(String UserName,String Password) throws SQLException {
+		String selectUser = "SELECT * FROM Users WHERE username=? and password =?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectUser);
+			selectStmt.setString(1, UserName);
+			selectStmt.setString(2, Password);
+			results = selectStmt.executeQuery();
+			if(results.next()) {
+				String resultUserName = results.getString("userName");
+				String FirstName = results.getString("firstName");
+				String LastName = results.getString("lastName");
+				String Email = results.getString("email");
+				String Privileges = results.getString("privileges");
+				Users user = new Users(resultUserName, Password, FirstName, LastName, Email, Privileges);
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+		}
+		return null;
+	}
+	
+	// UPDATE	
+	public Users updateFirstName(Users user, String firstName) throws SQLException {
+		String updateFirstName = "UPDATE users SET firstName=? WHERE username=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updateFirstName);
+			updateStmt.setString(1, firstName);
+			updateStmt.setString(2, user.getUsername());
+			updateStmt.executeUpdate();
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
+	 // DELETE
 	public Users delete(Users user) throws SQLException {
 		String deleteUser = "DELETE FROM Users WHERE UserName=?;";
 		Connection connection = null;

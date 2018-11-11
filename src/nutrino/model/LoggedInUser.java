@@ -7,7 +7,9 @@ public class LoggedInUser extends Users {
 	protected DietLabels diet;
 	
 	public enum DietLabels {
-		balanced, vegan, Vegetarian, Paleo, Pescatarian
+		Balanced, AlcoholFree, CeleryFree, CrustaceanFree, DairyFree,EggFree,FishFree,GlutenFree,KidneyFriendly,
+		Kosher,LowPotassium,LupineFree,MustardFree,NoOilAdded,NoSugar,Paleo,PeanutFree,Pescatarian,PorkFree,RedMeatFree,
+		SesameFree,ShellFishFree,SoyFree,SugarConscious,TeaNutsFree,Vegan,Vegetarian,WheatFree
 	}
 	
 	public LoggedInUser(String username, float height, float weight, DietLabels diet) {
