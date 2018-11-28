@@ -29,6 +29,7 @@
 				<th>Health Labels</th>
 				<th>URL</th>
 				<th>Image</th>
+				<th>Add To Planner</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,6 +42,9 @@
 					<td><c:out value="${recipe.getHealth_labels()}" /></td>
 					<td><a href="${recipe.getUrl()}" target="_blank">Link</a></td>
 					<td><img src="${recipe.getImage()}"/></td>
+					<td>
+                    	<button type="submit"><a href="editplan?recipeID=${recipe.getId() }">Add</a></button>
+                    </td>
 				</tr>
 			</c:forEach>
 		</tbody>

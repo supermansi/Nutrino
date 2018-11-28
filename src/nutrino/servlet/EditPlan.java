@@ -69,5 +69,18 @@ public class EditPlan extends HttpServlet {
 		req.getRequestDispatcher("/Planner.jsp?username="+username).forward(req, resp);
 	}
 	
+	@Override
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		Map<String, String> messages = new HashMap<String, String>();
+        req.setAttribute("messages", messages);
+        int recipeID = Integer.parseInt(req.getParameter("recipeID"));
+        messages.put("success", "Displaying logged in user");
+        req.setAttribute("recipeID", recipeID);
+        //System.out.println(user.getUsername());
+		req.getRequestDispatcher("/EditPlanner.jsp").forward(req, resp);
+	}
+	
 
 }

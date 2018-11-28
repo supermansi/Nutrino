@@ -9,7 +9,7 @@
 <body>
 	<form action="editplan" method="post">
 		UserName: <input name="username" id="username"/> <br>
-		Recipe ID: <input name="recipeID" id="recipeID"/> <br>
+		Recipe ID: <input name="recipeID" id="recipeID" value="${recipeID }"/> <br>
 		Day: <select id="day" name="day">
 			<option value="Monday">Monday</option>
 			<option value="Tuesday">Tuesday</option>

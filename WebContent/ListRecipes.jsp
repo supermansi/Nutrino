@@ -26,9 +26,7 @@
                 	<td><c:out value="${recipes.getId() }" /></td>
                     <td><c:out value="${recipes.getLabel()}" /></td>
                     <td>
-                    	<form action="addToPlanner" method="post">
-                    		<button name="addBtn" value="${recipes.getId() }">Add</button>
-                    	</form>
+                    	<button type="submit"><a href="editplan?recipeID=${recipes.getId() }">Add</a></button>
                     </td>
                 </tr>
             </c:forEach>

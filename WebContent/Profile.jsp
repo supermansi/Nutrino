@@ -36,7 +36,7 @@
 	
 	<a href="planner?username=${user.username}">Show my plan</a> <br>
 	
-	<a href="calories?username=${user.username}">Daily Average Calorie Count</a> <c:if test="${not empty calories}"> = ${calories}</c:if>
+	<a href="calories?username=${user.username}">Daily Average Calorie Count</a> <c:if test="${not empty calories}"> = ${calories}</c:if> <br>
 	
 	<a href="analysis">Show analysis of meals</a>
 	
