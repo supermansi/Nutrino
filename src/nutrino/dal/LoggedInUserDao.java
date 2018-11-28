@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import nutrino.model.LoggedInUser;
-import nutrino.model.LoggedInUser.DietLabels;
 
 public class LoggedInUserDao {
 	

@@ -28,6 +28,7 @@
 				<th>Weight</th>
 				<th>Health Labels</th>
 				<th>URL</th>
+				<th>Image</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,7 +39,8 @@
 					<td><c:out value="${recipe.getCalories()}" /></td>
 					<td><c:out value="${recipe.getTotal_weight()}" /></td>
 					<td><c:out value="${recipe.getHealth_labels()}" /></td>
-					<td><c:out value="${recipe.getUrl()}" /></td>
+					<td><a href="${recipe.getUrl()}" target="_blank">Link</a></td>
+					<td><img src="${recipe.getImage()}"/></td>
 				</tr>
 			</c:forEach>
 		</tbody>

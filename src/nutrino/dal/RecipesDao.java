@@ -8,9 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import nutrino.model.Planner;
 import nutrino.model.Recipe;
-import nutrino.model.Users;
 
 public class RecipesDao {
 	
@@ -120,6 +118,7 @@ protected ConnectionManager connectionManager;
 			selectStmt.setString(1, "%" + label + "%");
 			results = selectStmt.executeQuery();
 			while(results.next()) {
+				int id = results.getInt("id");
 				String uri = results.getString("uri");
 				String newLabel = results.getString("label");
 				String image = results.getString("image");
@@ -128,7 +127,7 @@ protected ConnectionManager connectionManager;
 				String ingredient_lines = results.getString("ingredient_lines");
 				String total_weight = results.getString("total_weight");
 				String health_labels = results.getString("health_labels");
-				Recipe recipe = new Recipe(uri, newLabel, image, url, calories, ingredient_lines, total_weight, health_labels);
+				Recipe recipe = new Recipe(id, uri, newLabel, image, url, calories, ingredient_lines, total_weight, health_labels);
 				recipes.add(recipe);
 			}
 		} catch (SQLException e) {

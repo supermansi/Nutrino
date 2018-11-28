@@ -11,6 +11,11 @@ public class PlannerToRecipe {
 		this.recipeId = recipeId;
 		this.planId = planId;
 	}
+	
+	public PlannerToRecipe(int recipeId,int planId) {
+		this.recipeId = recipeId;
+		this.planId = planId;
+	}
 
 	public int getpToRid() {
 		return pToRid;

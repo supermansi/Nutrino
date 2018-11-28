@@ -32,7 +32,13 @@
 	
 	<a href="listrecipes?diet=${user.diet}">Show recipes for me</a> <br>
 	
-	<a href="ProfileUpdate.jsp">Update Profile</a>
+	<a href="ProfileUpdate.jsp">Update Profile</a> <br>
+	
+	<a href="planner?username=${user.username}">Show my plan</a> <br>
+	
+	<a href="calories?username=${user.username}">Daily Average Calorie Count</a> <c:if test="${not empty calories}"> = ${calories}</c:if>
+	
+	<a href="analysis">Show analysis of meals</a>
 	
 	<form class="form-inline my-2 my-lg-0" action="recipeSearch" method="post">
 		<input class="form-control mr-sm-2" name="recipeName" type="search" placeholder="Search"

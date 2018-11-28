@@ -17,11 +17,19 @@
 	
 	<table border="1">
 		<tr>
+			<th>Recipe ID</th>
 			<th>Recipe Name</th>
+			<th>Add to Planner</th>
 		</tr>
 		<c:forEach items="${recipes}" var="recipes" >
                 <tr>
+                	<td><c:out value="${recipes.getId() }" /></td>
                     <td><c:out value="${recipes.getLabel()}" /></td>
+                    <td>
+                    	<form action="addToPlanner" method="post">
+                    		<button name="addBtn" value="${recipes.getId() }">Add</button>
+                    	</form>
+                    </td>
                 </tr>
             </c:forEach>
 	</table>

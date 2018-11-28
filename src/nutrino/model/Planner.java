@@ -15,7 +15,11 @@ public class Planner {
 		Breakfast, Lunch, Dinner
 	}
 	
-	
+	public Planner(Users user, Day day, Time time) {
+		this.user = user;
+		this.day = day;
+		this.time = time;
+	}
 
 	public Planner(int planID, Users user, Day day, Time time) {
 		this.planID = planID;
