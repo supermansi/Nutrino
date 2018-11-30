@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import nutrino.model.Analysis;
 import nutrino.model.Recipe;
+import nutrino.model.Users;
 
 public class RecipesDao {
 	
@@ -193,6 +195,47 @@ protected ConnectionManager connectionManager;
 				deleteStmt.close();
 			}
 		}
+	}
+	
+	// Fetch Analysis
+	public List<Analysis> fetchAnalysis(String item) throws SQLException {
+		String find1 = "SELECT * FROM rice;";
+		String find2 = "SELECT * FROM tomato;";
+		String find3 = "SELECT * FROM egg;";
+		List<String> s = new ArrayList<String>();
+		s.add(find1);
+		s.add(find2);
+		s.add(find3);
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		List<Analysis> analysis = new ArrayList<Analysis>();
+		try {
+			connection = connectionManager.getConnection();
+			int random = (int)(Math.random() * 3 + 1);
+			selectStmt = connection.prepareStatement(s.get(random-1));
+			//selectStmt.setString(1, item);
+			results = selectStmt.executeQuery();
+			while(results.next()) {
+				String label = results.getString("Label");
+				float quantity = results.getFloat("Quantity");
+				String unit = results.getString("Unit");
+				Analysis a = new Analysis(label, quantity, unit);
+				analysis.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+		}
+		return analysis;
+
 	}
 
 }

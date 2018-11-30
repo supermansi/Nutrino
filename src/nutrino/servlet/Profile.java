@@ -35,8 +35,10 @@ public class Profile extends HttpServlet{
         req.setAttribute("messages", messages);
         LoggedInUser user;
         String username = req.getParameter("username");
+        float bmi;
         try {
         	user = loggedInUserDao.getLoggedInUserByUserName(username);
+        	bmi = user.getWeight()/(user.getHeight() * user.getHeight() / 10000);
         }
         catch (SQLException e) {
 			e.printStackTrace();
@@ -44,6 +46,7 @@ public class Profile extends HttpServlet{
         }
         messages.put("success", "Displaying logged in user");
         req.setAttribute("user", user);
+        req.setAttribute("bmi", bmi);
         //System.out.println(user.getUsername());
 		req.getRequestDispatcher("/Profile.jsp").forward(req, resp);
 	}

@@ -30,6 +30,10 @@
 		Diet: ${user.diet}
 	</h3>
 	
+	<h3>
+		BMI: ${bmi}
+	</h3>
+	
 	<a href="listrecipes?diet=${user.diet}">Show recipes for me</a> <br>
 	
 	<a href="ProfileUpdate.jsp">Update Profile</a> <br>
