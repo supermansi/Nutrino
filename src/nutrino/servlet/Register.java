@@ -19,6 +19,7 @@ import nutrino.dal.LoggedInUserDao;
 import nutrino.dal.UsersDao;
 import nutrino.model.LoggedInUser;
 import nutrino.model.Users;
+import sun.util.logging.resources.logging_zh_CN;
 
 @WebServlet("/usercreate")
 public class Register extends HttpServlet {
@@ -49,6 +50,7 @@ public class Register extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         Users user = null;
+    	float bmi = 0.0f;
         LoggedInUser loginEntry = null;
         String userName = req.getParameter("username");
         if (userName == null || userName.trim().isEmpty()) {
@@ -65,6 +67,7 @@ public class Register extends HttpServlet {
 	        try {
 	        	loginEntry = new LoggedInUser(userName, height, weight, LoggedInUser.DietLabels.valueOf(diet));
 	        	user = usersDao.create(user);
+	        	bmi = loginEntry.getWeight()/(loginEntry.getHeight() * loginEntry.getHeight() / 10000);
 	        	loggedInUserDao.create(loginEntry);
 	        	messages.put("success", "Successfully created " + userName);
 	        } catch (SQLException e) {
@@ -72,6 +75,7 @@ public class Register extends HttpServlet {
 				throw new IOException(e);
 	        }
         }
+		req.setAttribute("bmi", bmi);
         req.setAttribute("user", loginEntry);
         req.getRequestDispatcher("/Profile.jsp").forward(req, resp);
     }

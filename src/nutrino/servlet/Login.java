@@ -47,6 +47,7 @@ public class Login extends HttpServlet {
         req.setAttribute("messages", messages);
         Users user = null;
         LoggedInUser lUser = null;
+        float bmi = 0.0f;
         String userName = req.getParameter("username");
         if (userName == null || userName.trim().isEmpty()) {
             messages.put("success", "Invalid UserName");
@@ -57,12 +58,14 @@ public class Login extends HttpServlet {
 	        	messages.put("success", "Successfully created " + userName);
 	        	// req.setAttribute("userName", user.getFirstName());
 	        	lUser = loggedInUserDao.getLoggedInUserByUserName(user.getUsername());
+	        	bmi = lUser.getWeight()/(lUser.getHeight() * lUser.getHeight() / 10000);
 	        } catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
 	        }
         }
         req.setAttribute("user", lUser);
+        req.setAttribute("bmi", bmi);
         req.getRequestDispatcher("/Profile.jsp").forward(req, resp);
      /*   else{ 
         	req.getRequestDispatcher("/ListUsers.jsp").forward(req, resp);
